@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+//This is the model of the crawl request
 @Data
 public class CrawlRequest {
     @NotBlank(message = "URL cannot be blank")
