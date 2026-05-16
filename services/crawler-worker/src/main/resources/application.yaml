@@ -20,10 +20,10 @@ spring:
     host: ${REDIS_HOST}
     port: ${REDIS_PORT}
   
-    jpa:
-      hibernate:
-        ddl-auto: update
-      show-sql: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
   
 server.port: 8081
