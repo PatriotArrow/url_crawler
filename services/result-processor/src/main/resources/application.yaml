@@ -1,3 +1,26 @@
 spring:
   application:
     name: result-processor
+  
+  kafka:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+      consumer:
+        group-id: result-processor-group
+        auto-offset-reset: earliest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      
+  datasource:
+    url: jdbc:postgresql://localhost:5432/crawler_db
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  
+server.port: 8082
