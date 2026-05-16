@@ -18,11 +18,11 @@ public class CrawlJobConsumer {
     }
 
     @KafkaListener(topics = "crawl-jobs", groupId = "crawler-worker-group")
-    void consumeCrawlJob(String url) {
+    void consumeCrawlJob(String messageJson) {
         
-        log.info("Received crawl job: {}", url);
+        log.info("Received crawl job: {}", messageJson);
         
-        this.crawlerService.processCrawlJob(url);
+        this.crawlerService.processCrawlJob(messageJson);
 
     }
 }
