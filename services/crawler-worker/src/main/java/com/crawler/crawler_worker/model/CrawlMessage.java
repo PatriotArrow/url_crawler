@@ -1,4 +1,4 @@
-package com.crawler.api_service.model;
+package com.crawler.crawler_worker.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
