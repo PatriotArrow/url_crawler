@@ -31,13 +31,17 @@ public class CrawlResultConsumer {
 
     @KafkaListener(topics = "crawl-results")
     void consumeCrawlResult(
-        @Payload String message,
-        @Header(KafkaHeaders.RECEIVED_KEY) String url
+        @Header(KafkaHeaders.RECEIVED_KEY)String jobId,
+        @Payload String message
     ){
         try{
-            int linksFound = Integer.parseInt(message.split(" ")[1]);
+
+            String[] parts = message.split("\\|");
+            String url = parts[0];
+            int linksFound = Integer.parseInt(parts[1]);
+
             CrawlResult crawlResult = new CrawlResult();
-            crawlResult.setJobId(url);
+            crawlResult.setJobId(jobId);
             crawlResult.setUrl(url);
             crawlResult.setLinksFound(linksFound);
             crawlResult.setCrawledAt(LocalDateTime.now()); 

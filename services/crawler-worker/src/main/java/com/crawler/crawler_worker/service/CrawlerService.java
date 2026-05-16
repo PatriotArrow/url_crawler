@@ -82,7 +82,7 @@ public class CrawlerService {
                         }
                         
                     }
-                    kafkaTemplate.send("crawl-results", url, "crawled: " + links.size() + " links found");
+                    kafkaTemplate.send("crawl-results", jobId, url + "|" + links.size());
                 
                 } catch (Exception e) {
                     log.error("Failed to crawl URL: {}", url, e);
