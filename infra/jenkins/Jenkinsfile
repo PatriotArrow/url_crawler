@@ -35,7 +35,7 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 dir('infra') {
-                    sh 'docker compose build'
+                    sh 'docker-compose build'
                 }
             }
         }
