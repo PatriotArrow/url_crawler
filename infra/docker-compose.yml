@@ -115,6 +115,18 @@ services:
         condition: service_healthy
       postgres:
         condition: service_started
+
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:2.504-jdk21
+    ports:
+      - "8090:8080"
+      - "50000:50000"
+    networks:
+      - crawler-network
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
 networks:
   crawler-network:
     driver: bridge
@@ -122,3 +134,4 @@ networks:
 volumes:
   postgres_data:
   redis_data:
+  jenkins_data:

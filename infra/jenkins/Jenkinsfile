@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build API Service') {
+            steps {
+                dir('services/api-service') {
+                    sh 'mvn package -DskipTests'
+                }
+            }
+        }
+
+        stage('Build Crawler Worker') {
+            steps {
+                dir('services/crawler-worker') {
+                    sh 'mvn package -DskipTests'
+                }
+            }
+        }
+
+        stage('Build Result Processor') {
+            steps {
+                dir('services/result-processor') {
+                    sh 'mvn package -DskipTests'
+                }
+            }
+        }
+
+        stage('Build Docker Images') {
+            steps {
+                dir('infra') {
+                    sh 'docker compose build'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded'
+        }
+        failure {
+            echo 'Pipeline failed'
+        }
+    }
+}
